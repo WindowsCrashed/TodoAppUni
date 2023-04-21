@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/widgets/app_drawer.dart';
 import 'package:todo_app_uni/widgets/task_card.dart';
 import 'package:todo_app_uni/data/db.dart';
@@ -9,15 +10,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Just do it!',
-          style: TextStyle(
-            fontSize: 25
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
+      appBar: const AppAppBar(title: 'Just do it!'),
       backgroundColor: Colors.grey[200],
       drawer: const AppDrawer(),
       body: ListView(

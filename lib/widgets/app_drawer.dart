@@ -9,8 +9,8 @@ class AppDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: const [
-          DrawerHeader(
+        children: [
+          const DrawerHeader(
             margin: EdgeInsets.zero,
             decoration: BoxDecoration(
                 color: Colors.black
@@ -24,9 +24,23 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
-          DrawerListTile(title: 'Create task', icon: Icons.task_alt,),
-          DrawerListTile(title: 'Create task type', icon: Icons.task,),
-          DrawerListTile(title: 'Create priority', icon: Icons.priority_high,)
+          DrawerListTile(
+            title: 'Create task',
+            icon: Icons.task_alt,
+            onTap: () {},
+          ),
+          DrawerListTile(
+            title: 'Create task type',
+            icon: Icons.task,
+            onTap: () {
+              Navigator.pushNamed(context, '/create-task-type');
+            },
+          ),
+          DrawerListTile(
+            title: 'Create priority',
+            icon: Icons.priority_high,
+            onTap: () {},
+          )
         ],
       ),
     );
