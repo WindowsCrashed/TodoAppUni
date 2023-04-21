@@ -14,22 +14,22 @@ class Home extends StatelessWidget {
     List<Task> tasks = [
       Task(
           name: 'Do some stuff',
-          priority: TaskPriority('low'),
-          type: TaskType('General'),
+          priority: TaskPriority(priority: 'low', color: Colors.green),
+          types: [TaskType('general')],
           date: DateTime.now(),
           description: 'Something goes here...'
       ),
       Task(
           name: 'Clean the house',
-          priority: TaskPriority('medium'),
-          type: TaskType('Cleaning'),
+          priority: TaskPriority(priority: 'medium', color: Colors.yellow.shade600),
+          types: [TaskType('cleaning'), TaskType('house chores')],
           date: DateTime.now(),
           description: 'You have to clean the house...'
       ),
       Task(
           name: 'Have lunch',
-          priority: TaskPriority('high'),
-          type: TaskType('meal'),
+          priority: TaskPriority(priority: 'high', color: Colors.red, icon: Icons.warning_amber),
+          types: [TaskType('meal')],
           date: DateTime.now(),
           description: 'You have to eat... now...'
       ),
@@ -52,7 +52,7 @@ class Home extends StatelessWidget {
         children: [
           TaskCard(task: tasks[0],),
           TaskCard(task: tasks[1],),
-          TaskCard(task: tasks[2],)
+          TaskCard(task: tasks[2],),
         ],
       ),
     );

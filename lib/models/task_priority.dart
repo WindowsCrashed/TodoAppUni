@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
+
 class TaskPriority {
   String priority;
+  Color color;
+  IconData? icon;
 
-  TaskPriority(this.priority);
+  TaskPriority({required this.priority, this.icon, this.color = Colors.black});
 }

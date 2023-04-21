@@ -4,14 +4,14 @@ import 'package:intl/intl.dart';
 
 class Task {
   String name;
-  TaskType type;
+  List<TaskType>? types;
   TaskPriority priority;
   String description;
   DateTime date;
 
   Task({
     required this.name,
-    required this.type,
+    this.types,
     required this.priority,
     this.description = '',
     required this.date
