@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:todo_app_uni/models/validation_response.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
@@ -19,7 +20,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
 
   IconData? _icon;
   // IconData? icon = Icons.warning_amber;
-  Color? color;
+  Color _color = Colors.black;
 
   void save() {
     // if (_formKey.currentState!.validate()) {
@@ -41,6 +42,50 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
     _icon = icon;
     setState(() {});
   }
+
+  void _pickColor(context) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Select a color'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            BlockPicker(
+                pickerColor: _color,
+                availableColors: const [
+                  Colors.black,
+                  Colors.blueGrey,
+                  Colors.grey,
+                  Colors.brown,
+                  Colors.deepPurple,
+                  Colors.indigo,
+                  Colors.blue,
+                  Colors.cyan,
+                  Colors.teal,
+                  Colors.green,
+                  Colors.lightGreen,
+                  Colors.purpleAccent,
+                  Colors.red,
+                  Colors.deepOrangeAccent,
+                  Colors.orange,
+                  Colors.amber,
+                ],
+                onColorChanged: (color) => setState(() {
+                  _color = color;
+                })
+            ),
+            TextButton(
+              child: const Text('Select',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        ),
+      )
+  );
 
   Widget _displayIcon() {
     if (_icon == null) {
@@ -148,7 +193,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
                                               height: 40,
                                               width: 90,
                                               child: ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () => _pickColor(context),
                                                   style: ElevatedButton.styleFrom(
                                                       backgroundColor: Colors.black
                                                   ),
@@ -159,9 +204,12 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
                                                   )
                                               ),
                                             ),
-                                            Text('Black',
-                                              style: TextStyle(
-                                                fontSize: 20
+                                            Container(
+                                              width: 40,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: _color
                                               ),
                                             )
                                           ],
