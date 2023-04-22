@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:todo_app_uni/models/validation_response.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/services/task_type_service.dart';
@@ -16,7 +17,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
 
   final TextEditingController priorityController = TextEditingController();
 
-  IconData? icon;
+  IconData? _icon;
   // IconData? icon = Icons.warning_amber;
   Color? color;
 
@@ -35,8 +36,14 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
     Navigator.pop(context);
   }
 
-  Widget displayIcon() {
-    if (icon == null) {
+  void _pickIcon() async {
+    IconData? icon = await FlutterIconPicker.showIconPicker(context, iconPackModes: [IconPack.material]);
+    _icon = icon;
+    setState(() {});
+  }
+
+  Widget _displayIcon() {
+    if (_icon == null) {
       return Text('None',
         style: TextStyle(
           fontSize: 20,
@@ -45,7 +52,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
         ),
       );
     } else {
-      return Icon(icon, size: 40);
+      return Icon(_icon, size: 40);
     }
   }
 
@@ -117,7 +124,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
                                               height: 40,
                                               width: 90,
                                               child: ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: _pickIcon,
                                                   style: ElevatedButton.styleFrom(
                                                     backgroundColor: Colors.black
                                                   ),
@@ -128,7 +135,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
                                                   )
                                               ),
                                             ),
-                                            displayIcon()
+                                            _displayIcon()
                                           ],
                                         ),
                                       ),
