@@ -4,6 +4,7 @@ import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:todo_app_uni/models/validation_response.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/services/task_priority_service.dart';
+import 'package:todo_app_uni/widgets/save_cancel_buttons.dart';
 
 class CreateTaskPriority extends StatefulWidget {
   const CreateTaskPriority({Key? key}) : super(key: key);
@@ -39,10 +40,6 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
           SnackBar(content: Text(response.message), duration: const Duration(seconds: 3),)
       );
     }
-  }
-
-  void cancel() {
-    Navigator.pop(context);
   }
 
   void _pickIcon() async {
@@ -230,46 +227,7 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 110,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                height: 50,
-                                width: 210,
-                                child: ElevatedButton(
-                                    onPressed: save,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 12),
-                                    ),
-                                    child: const Text('Save',
-                                      style: TextStyle(
-                                          fontSize: 20
-                                      ),
-                                    )
-                                ),
-                              ),
-                              SizedBox(
-                                height: 50,
-                                width: 210,
-                                child: OutlinedButton(
-                                    onPressed: cancel,
-                                    style: OutlinedButton.styleFrom(
-                                        foregroundColor: Colors.black54,
-                                        side: const BorderSide(width: 2, color: Colors.black54)
-                                    ),
-                                    child: const Text('Cancel',
-                                      style: TextStyle(
-                                          fontSize: 20
-                                      ),
-                                    )
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
+                        SaveCancelButtons(onSave: save, context: context,)
                       ],
                     ),
                   ),
