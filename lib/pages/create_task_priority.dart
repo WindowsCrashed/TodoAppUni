@@ -3,7 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:todo_app_uni/models/validation_response.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
-import 'package:todo_app_uni/services/task_type_service.dart';
+import 'package:todo_app_uni/services/task_priority_service.dart';
 
 class CreateTaskPriority extends StatefulWidget {
   const CreateTaskPriority({Key? key}) : super(key: key);
@@ -14,23 +14,31 @@ class CreateTaskPriority extends StatefulWidget {
 
 class _CreateTaskPriorityState extends State<CreateTaskPriority> {
   final _formKey = GlobalKey<FormState>();
-  // final _taskTypeService = TaskTypeService();
+  final _taskPriorityService = TaskPriorityService();
 
   final TextEditingController priorityController = TextEditingController();
 
   IconData? _icon;
-  // IconData? icon = Icons.warning_amber;
   Color _color = Colors.black;
 
   void save() {
-    // if (_formKey.currentState!.validate()) {
-    //   FocusScope.of(context).unfocus();
-    //   ValidationResponse response = _taskTypeService.addTaskType(fieldController.text);
-    //   if (response.response) {
-    //     Navigator.pop(context);
-    //   }
-    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.message)));
-    // }
+    if (_formKey.currentState!.validate()) {
+      FocusScope.of(context).unfocus();
+
+      Map taskPriority = {
+        'priority': priorityController.text,
+        'color': _color,
+        'icon': _icon
+      };
+
+      ValidationResponse response = _taskPriorityService.addTaskPriority(taskPriority);
+      if (response.response) {
+        Navigator.pop(context);
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.message), duration: const Duration(seconds: 3),)
+      );
+    }
   }
 
   void cancel() {

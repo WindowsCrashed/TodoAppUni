@@ -23,7 +23,9 @@ class _CreateTaskTypeState extends State<CreateTaskType> {
       if (response.response) {
         Navigator.pop(context);
       }
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(response.message)));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.message), duration: const Duration(seconds: 3))
+      );
     }
   }
 
