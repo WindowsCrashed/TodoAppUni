@@ -39,7 +39,9 @@ class AppDrawer extends StatelessWidget {
           DrawerListTile(
             title: 'Create priority',
             icon: Icons.priority_high,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/create-task-priority');
+            },
           )
         ],
       ),
