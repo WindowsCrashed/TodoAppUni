@@ -116,123 +116,124 @@ class _CreateTaskPriorityState extends State<CreateTaskPriority> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: const AppAppBar(title: 'Create Task Priority'),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 25),
-          child: GestureDetector(
-            child: Column(
-              children: [
-                const Text('Create a new task priority',
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold
-                  ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Form(
-                  key: _formKey,
-                  child: SizedBox(
-                    height: 345,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 150,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextFormField(
-                                controller: priorityController,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Priority',
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Required field';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('Optional fields:'),
-                                  const SizedBox(height: 10,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: 150,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              height: 40,
-                                              width: 90,
-                                              child: ElevatedButton(
-                                                  onPressed: _pickIcon,
-                                                  style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Colors.black
-                                                  ),
-                                                  child: const Text('Icon',
-                                                    style: TextStyle(
-                                                      fontSize: 18
-                                                    ),
-                                                  )
-                                              ),
-                                            ),
-                                            _displayIcon()
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              height: 40,
-                                              width: 90,
-                                              child: ElevatedButton(
-                                                  onPressed: () => _pickColor(context),
-                                                  style: ElevatedButton.styleFrom(
-                                                      backgroundColor: Colors.black
-                                                  ),
-                                                  child: const Text('Color',
-                                                    style: TextStyle(
-                                                        fontSize: 18
-                                                    ),
-                                                  )
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 40,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: _color
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        SaveCancelButtons(onSave: save, context: context,)
-                      ],
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 25),
+            child: GestureDetector(
+              child: Column(
+                children: [
+                  const Text('Create a new task priority',
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: SizedBox(
+                      height: 345,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 150,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextFormField(
+                                  controller: priorityController,
+                                  decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Priority',
+                                  ),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Required field';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('Optional fields:'),
+                                    const SizedBox(height: 10,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        SizedBox(
+                                          width: 150,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SizedBox(
+                                                height: 40,
+                                                width: 90,
+                                                child: ElevatedButton(
+                                                    onPressed: _pickIcon,
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor: Colors.black
+                                                    ),
+                                                    child: const Text('Icon',
+                                                      style: TextStyle(
+                                                        fontSize: 18
+                                                      ),
+                                                    )
+                                                ),
+                                              ),
+                                              _displayIcon()
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 150,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SizedBox(
+                                                height: 40,
+                                                width: 90,
+                                                child: ElevatedButton(
+                                                    onPressed: () => _pickColor(context),
+                                                    style: ElevatedButton.styleFrom(
+                                                        backgroundColor: Colors.black
+                                                    ),
+                                                    child: const Text('Color',
+                                                      style: TextStyle(
+                                                          fontSize: 18
+                                                      ),
+                                                    )
+                                                ),
+                                              ),
+                                              Container(
+                                                width: 40,
+                                                height: 40,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: _color
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          SaveCancelButtons(onSave: save, context: context,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

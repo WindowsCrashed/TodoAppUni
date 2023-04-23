@@ -24,4 +24,12 @@ class TaskPriorityService {
     }
     return response;
   }
+
+  List<TaskPriority> getPriorities() {
+    return Db.priorities;
+  }
+
+  TaskPriority getPriority(String name) {
+    return Db.priorities.firstWhere((p) => p.priority == name);
+  }
 }

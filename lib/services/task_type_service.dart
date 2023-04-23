@@ -20,4 +20,8 @@ class TaskTypeService {
     }
     return response;
   }
+
+  List<TaskType> getTypes() {
+    return Db.types;
+  }
 }

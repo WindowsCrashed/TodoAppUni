@@ -40,48 +40,49 @@ class _CreateTaskTypeState extends State<CreateTaskType> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: const AppAppBar(title: 'Create Task Type'),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 25),
-          child: GestureDetector(
-            child: Column(
-              children: [
-                const Text('Create a new task type',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Form(
-                  key: _formKey,
-                  child: SizedBox(
-                    height: 220,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextFormField(
-                          controller: fieldController,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Task type',
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Required field';
-                            }
-                            return null;
-                          },
-                        ),
-                        SaveCancelButtons(onSave: save, context: context)
-                      ],
+        body: SingleChildScrollView(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 25),
+            child: GestureDetector(
+              child: Column(
+                children: [
+                  const Text('Create a new task type',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: SizedBox(
+                      height: 220,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextFormField(
+                            controller: fieldController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Task type',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Required field';
+                              }
+                              return null;
+                            },
+                          ),
+                          SaveCancelButtons(onSave: save, context: context)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

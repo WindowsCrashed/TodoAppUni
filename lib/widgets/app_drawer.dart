@@ -27,21 +27,17 @@ class AppDrawer extends StatelessWidget {
           DrawerListTile(
             title: 'Create task',
             icon: Icons.task_alt,
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, '/create-task'),
           ),
           DrawerListTile(
             title: 'Create task type',
             icon: Icons.task,
-            onTap: () {
-              Navigator.pushNamed(context, '/create-task-type');
-            },
+            onTap: () => Navigator.pushNamed(context, '/create-task-type'),
           ),
           DrawerListTile(
             title: 'Create priority',
             icon: Icons.priority_high,
-            onTap: () {
-              Navigator.pushNamed(context, '/create-task-priority');
-            },
+            onTap: () => Navigator.pushNamed(context, '/create-task-priority'),
           )
         ],
       ),
