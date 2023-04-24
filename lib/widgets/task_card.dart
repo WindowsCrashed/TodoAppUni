@@ -31,35 +31,43 @@ class _TaskCardState extends State<TaskCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        height: 54,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(widget.task.name,
-                              style: const TextStyle(
-                                  fontSize: 27,
-                                  fontWeight: FontWeight.bold
+                  SizedBox(
+                    width: 210,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          height: 54,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(widget.task.name,
+                                style: const TextStyle(
+                                    fontSize: 27,
+                                    fontWeight: FontWeight.bold
+                                ),
                               ),
-                            ),
-                            Text(widget.task.description,
-                              style: const TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey
+                              Text(widget.task.description,
+                                style: const TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    color: Colors.grey
+                                ),
+                                // maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Row(
-                        children: generateTags(widget.task.types)
-                      )
-                    ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: generateTags(widget.task.types),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 95,

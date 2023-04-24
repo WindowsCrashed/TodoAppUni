@@ -14,7 +14,7 @@ void seedDb() {
 
   List<TaskPriority> priorities = [
     TaskPriority(priority: 'low', color: Colors.green),
-    TaskPriority(priority: 'medium', color: Colors.yellow.shade600),
+    TaskPriority(priority: 'medium', color: Colors.amber),
     TaskPriority(priority: 'high', color: Colors.red, icon: Icons.warning_amber)
   ];
 

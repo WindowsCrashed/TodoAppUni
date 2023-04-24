@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/pages/create_task.dart';
+import 'package:todo_app_uni/pages/create_task_priority.dart';
 import 'package:todo_app_uni/pages/create_task_type.dart';
 import 'package:todo_app_uni/pages/home.dart';
 import 'package:todo_app_uni/services/seed_db.dart';
@@ -12,6 +14,8 @@ void main() {
     routes: {
       '/home': (context) => const Home(),
       '/create-task-type': (context) => const CreateTaskType(),
+      '/create-task-priority': (context) => const CreateTaskPriority(),
+      '/create-task': (context) => const CreateTask()
     },
     debugShowCheckedModeBanner: false,
   ));

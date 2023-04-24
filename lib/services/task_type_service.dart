@@ -20,4 +20,12 @@ class TaskTypeService {
     }
     return response;
   }
+
+  List<TaskType> getTypes() {
+    return Db.types;
+  }
+
+  TaskType getType(String name) {
+    return Db.types.firstWhere((t) => t.type == name);
+  }
 }
