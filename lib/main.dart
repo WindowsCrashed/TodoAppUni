@@ -12,7 +12,7 @@ void main() {
     title: 'JustDoIi!',
     initialRoute: '/home',
     routes: {
-      '/home': (context) => const Home(),
+      '/home': (context) => Home(),
       '/create-task-type': (context) => const CreateTaskType(),
       '/create-task-priority': (context) => const CreateTaskPriority(),
       '/create-task': (context) => const CreateTask()
