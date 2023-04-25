@@ -6,4 +6,5 @@ class Db {
   static final List<Task> tasks = [];
   static final List<TaskPriority> priorities = [];
   static final List<TaskType> types = [];
+  static final List<Task> completedTasks = [];
 }

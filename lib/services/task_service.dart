@@ -40,4 +40,17 @@ class TaskService {
   Task getTask(String name) {
     return Db.tasks.firstWhere((t) => t.name == name);
   }
+
+  String deleteTask(String name) {
+    Task? task = getTask(name);
+    Db.tasks.remove(task);
+    return 'Task successfully removed.';
+  }
+
+  String completeTask(String name) {
+    Task? task = getTask(name);
+    Db.completedTasks.add(task);
+    Db.tasks.remove(task);
+    return 'Task successfully completed.';
+  }
 }

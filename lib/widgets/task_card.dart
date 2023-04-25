@@ -48,6 +48,7 @@ class _TaskCardState extends State<TaskCard> {
                                     fontSize: 27,
                                     fontWeight: FontWeight.bold
                                 ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                               Text(widget.task.description,
                                 style: const TextStyle(
