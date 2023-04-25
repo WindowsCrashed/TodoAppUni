@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'drawer_list_tile.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  final Function setStateCallback;
+
+  const AppDrawer({Key? key, required this.setStateCallback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class AppDrawer extends StatelessWidget {
                 color: Colors.black
             ),
             child: Center(
-              child: Text('Things to do',
+              child: Text('Just do it!',
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 30
@@ -27,7 +29,10 @@ class AppDrawer extends StatelessWidget {
           DrawerListTile(
             title: 'Create task',
             icon: Icons.task_alt,
-            onTap: () => Navigator.pushNamed(context, '/create-task'),
+            onTap: () async {
+              await Navigator.pushNamed(context, '/create-task');
+              setStateCallback();
+            },
           ),
           DrawerListTile(
             title: 'Create task type',
