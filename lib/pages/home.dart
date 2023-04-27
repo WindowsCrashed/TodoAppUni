@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     if (_isChecking) {
       return TaskCardAlt(task: task, setStateCallback: () => setState((){}),);
     } else {
-      return TaskCard(task: task);
+      return TaskCard(task: task, setStateCallback: () => setState(() {}),);
     }
   }
 
