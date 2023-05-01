@@ -32,4 +32,10 @@ class TaskPriorityService {
   TaskPriority getPriority(String name) {
     return Db.priorities.firstWhere((p) => p.priority == name);
   }
+
+  String deletePriority(String name) {
+    TaskPriority? priority = getPriority(name);
+    Db.priorities.remove(priority);
+    return 'Task priority successfully removed.';
+  }
 }

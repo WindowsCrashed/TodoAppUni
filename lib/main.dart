@@ -3,6 +3,7 @@ import 'package:todo_app_uni/pages/create_task.dart';
 import 'package:todo_app_uni/pages/create_task_priority.dart';
 import 'package:todo_app_uni/pages/create_task_type.dart';
 import 'package:todo_app_uni/pages/home.dart';
+import 'package:todo_app_uni/pages/list_task_priorities.dart';
 import 'package:todo_app_uni/pages/list_task_types.dart';
 import 'package:todo_app_uni/pages/view_task.dart';
 import 'package:todo_app_uni/services/seed_db.dart';
@@ -19,7 +20,8 @@ void main() {
       '/create-task-priority': (context) => const CreateTaskPriority(),
       '/create-task': (context) => const CreateTask(),
       '/view-task': (context) => ViewTask(),
-      '/list-task-types': (context) => const ListTaskTypes()
+      '/list-task-types': (context) => const ListTaskTypes(),
+      '/list-task-priorities': (context) => const ListTaskPriorities()
     },
     debugShowCheckedModeBanner: false,
   ));

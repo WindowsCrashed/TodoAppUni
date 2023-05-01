@@ -13,7 +13,7 @@ class ListTaskTypes extends StatefulWidget {
 class _ListTaskTypesState extends State<ListTaskTypes> {
   final _taskTypeService = TaskTypeService();
 
-  void _deleteType(type) {
+  void _deleteType(TaskType type) {
     String response = _taskTypeService.deleteType(type.type);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
@@ -22,7 +22,7 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
     setState(() {});
   }
   
-  void _showTypeDialog(context, type) => showDialog(
+  void _showTypeDialog(context, TaskType type) => showDialog(
       context: context,
       builder: (context) => SimpleDialog(
         titlePadding: const EdgeInsets.symmetric(vertical: 20),
@@ -69,7 +69,7 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
       )
   );
 
-  Widget buildList(context, index, types) {
+  Widget _buildList(context, index, types) {
     return ListTile(
       title: Text(types[index].type,
         style: const TextStyle(
@@ -88,7 +88,7 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
       appBar: const AppAppBar(title: 'Task types'),
       body: ListView.separated(
         itemCount: types.length,
-        itemBuilder: (context, index) => buildList(context, index, types),
+        itemBuilder: (context, index) => _buildList(context, index, types),
         separatorBuilder: (context, index) => const Divider(thickness: 1.2,),
       ),
     );
