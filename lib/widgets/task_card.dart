@@ -5,8 +5,10 @@ import 'package:todo_app_uni/widgets/task_type_chip.dart';
 
 class TaskCard extends StatefulWidget {
   final Task task;
+  final Function setStateCallback;
 
-  const TaskCard({Key? key, required this.task}) : super(key: key);
+  const TaskCard({Key? key, required this.task, required this.setStateCallback})
+      : super(key: key);
 
   @override
   State<TaskCard> createState() => _TaskCardState();
@@ -23,7 +25,10 @@ class _TaskCardState extends State<TaskCard> {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 7),
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          await Navigator.pushNamed(context, '/view-task', arguments: { 'task': widget.task });
+          widget.setStateCallback();
+        },
         child: SizedBox(
             height: 135,
             child: Padding(
@@ -55,7 +60,6 @@ class _TaskCardState extends State<TaskCard> {
                                     fontStyle: FontStyle.italic,
                                     color: Colors.grey
                                 ),
-                                // maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
@@ -86,7 +90,6 @@ class _TaskCardState extends State<TaskCard> {
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontStyle: FontStyle.italic,
-                                  // fontWeight: FontWeight.bold
                                 ),
                               ),
                               Text(widget.task.getTime(),
@@ -111,7 +114,8 @@ class _TaskCardState extends State<TaskCard> {
                                   fontSize: 17,
                                   color: widget.task.priority.color,
                                   fontWeight: FontWeight.bold
-                              )
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             )
                           ]
                         )

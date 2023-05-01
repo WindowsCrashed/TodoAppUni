@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/widgets/app_drawer_section_divider.dart';
 import 'drawer_list_tile.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -26,6 +27,18 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           ),
+          const AppDrawerSectionDivider(label: 'Visualization'),
+          DrawerListTile(
+              title: 'Task types',
+              icon: Icons.task,
+              onTap: () => Navigator.pushNamed(context, '/list-task-types')
+          ),
+          DrawerListTile(
+              title: 'Task priorities',
+              icon: Icons.priority_high,
+              onTap: () => Navigator.pushNamed(context, '/list-task-priorities')
+          ),
+          const AppDrawerSectionDivider(label: 'Creation'),
           DrawerListTile(
             title: 'Create task',
             icon: Icons.task_alt,
@@ -43,7 +56,7 @@ class AppDrawer extends StatelessWidget {
             title: 'Create priority',
             icon: Icons.priority_high,
             onTap: () => Navigator.pushNamed(context, '/create-task-priority'),
-          )
+          ),
         ],
       ),
     );

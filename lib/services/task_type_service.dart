@@ -28,4 +28,10 @@ class TaskTypeService {
   TaskType getType(String name) {
     return Db.types.firstWhere((t) => t.type == name);
   }
+
+  String deleteType(String name) {
+    TaskType? type = getType(name);
+    Db.types.remove(type);
+    return 'Task type successfully removed.';
+  }
 }
