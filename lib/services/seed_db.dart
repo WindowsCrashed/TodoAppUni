@@ -23,7 +23,7 @@ void seedDb() {
         name: 'Do some stuff',
         priority: priorities[0],
         types: [types[0]],
-        date: DateTime(23, 6, 2, 16, 30),
+        date: DateTime(23, 3, 2, 16, 30),
         description: 'Something goes here...'
     ),
     Task(

@@ -9,7 +9,7 @@ class CompletedTask {
   CompletedTask({required this.task}) {
     conclusionDate = DateTime.now();
 
-    if (task.date.isBefore(conclusionDate)
+    if (task.date.isAfter(conclusionDate)
         || task.date.isAtSameMomentAs(conclusionDate)) {
       success = true;
     } else {
