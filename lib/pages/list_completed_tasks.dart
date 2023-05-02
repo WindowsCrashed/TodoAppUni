@@ -83,14 +83,14 @@ class _ListCompletedTasksState extends State<ListCompletedTasks> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(completedTask.task.getDate(),
+                  Text(completedTask.getDate(),
                     style: TextStyle(
                       color: completedTask.success ? Colors.green : Colors.red,
                       fontWeight: FontWeight.bold,
                       fontSize: 24
                     ),
                   ),
-                  Text(completedTask.task.getTime(),
+                  Text(completedTask.getTime(),
                     style: TextStyle(
                         color: completedTask.success ? Colors.green : Colors.red,
                         fontWeight: FontWeight.bold,
