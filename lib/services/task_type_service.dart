@@ -12,8 +12,8 @@ class TaskTypeService {
     return ValidationResponse(response: true, message: 'Task type successfully created.');
   }
 
-  ValidationResponse addTaskType(String taskName) {
-    TaskType newTaskType = TaskType(taskName);
+  ValidationResponse addTaskType(String type) {
+    TaskType newTaskType = TaskType(type);
     ValidationResponse response = _validateNewTaskType(newTaskType);
     if (response.response) {
       Db.types.add(newTaskType);
@@ -27,6 +27,11 @@ class TaskTypeService {
 
   TaskType getType(String name) {
     return Db.types.firstWhere((t) => t.type == name);
+  }
+
+  String editTaskType(String type, String newType) {
+    getType(type).type = newType;
+    return 'Task type successfully updated.';
   }
 
   String deleteType(String name) {

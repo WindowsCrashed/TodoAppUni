@@ -46,7 +46,11 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
                 ),
               ),
               SimpleDialogOption(
-                onPressed: () {},
+                onPressed: () async {
+                  await Navigator.pushNamed(context, '/edit-task-type',
+                      arguments: { 'type': type });
+                  setState(() {});
+                },
                 child: const Text('Edit',
                   style: TextStyle(
                       fontSize: 18,
