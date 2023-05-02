@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/helpers/show_confirm_deletion_dialog.dart';
 import 'package:todo_app_uni/models/task_priority.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/services/task_priority_service.dart';
@@ -18,7 +19,7 @@ class _ListTaskPrioritiesState extends State<ListTaskPriorities> {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
     );
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName('/list-task-priorities'));
     setState(() {});
   }
 
@@ -50,7 +51,8 @@ class _ListTaskPrioritiesState extends State<ListTaskPriorities> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SimpleDialogOption(
-                onPressed: () => _deletePriority(priority),
+                onPressed: () => showConfirmDeletionDialog(
+                    context: context, onPressed: () => _deletePriority(priority)),
                 child: const Text('Delete',
                   style: TextStyle(
                       fontSize: 18,

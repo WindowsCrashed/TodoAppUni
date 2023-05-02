@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/helpers/show_confirm_deletion_dialog.dart';
 import 'package:todo_app_uni/models/task.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/models/task_type.dart';
@@ -33,7 +34,7 @@ class _ViewTaskState extends State<ViewTask> {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
     );
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName('/home'));
   }
 
   void _editTask(Task task) async {
@@ -161,7 +162,8 @@ class _ViewTaskState extends State<ViewTask> {
                                 width: 125,
                                 height: 40,
                                 child: ElevatedButton(
-                                  onPressed: () => _deleteTask(task.name),
+                                  onPressed: () => showConfirmDeletionDialog(
+                                      context: context, onPressed: () => _deleteTask(task.name)),
                                   style: const ButtonStyle(
                                       backgroundColor: MaterialStatePropertyAll(Colors.red)
                                   ),

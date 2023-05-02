@@ -6,6 +6,7 @@ import 'package:todo_app_uni/pages/edit_task.dart';
 import 'package:todo_app_uni/pages/edit_task_priority.dart';
 import 'package:todo_app_uni/pages/edit_task_type.dart';
 import 'package:todo_app_uni/pages/home.dart';
+import 'package:todo_app_uni/pages/list_completed_tasks.dart';
 import 'package:todo_app_uni/pages/list_task_priorities.dart';
 import 'package:todo_app_uni/pages/list_task_types.dart';
 import 'package:todo_app_uni/pages/view_task.dart';
@@ -27,7 +28,8 @@ void main() {
       '/list-task-priorities': (context) => const ListTaskPriorities(),
       '/edit-task-type': (context) => const EditTaskType(),
       '/edit-task-priority': (context) => const EditTaskPriority(),
-      '/edit-task': (context) => const EditTask()
+      '/edit-task': (context) => const EditTask(),
+      '/list-completed-tasks': (context) => const ListCompletedTasks()
     },
     debugShowCheckedModeBanner: false,
   ));

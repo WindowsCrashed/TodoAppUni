@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/helpers/show_confirm_deletion_dialog.dart';
 import 'package:todo_app_uni/models/task_type.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/services/task_type_service.dart';
@@ -18,7 +19,7 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
     );
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName('/list-task-types'));
     setState(() {});
   }
   
@@ -37,7 +38,8 @@ class _ListTaskTypesState extends State<ListTaskTypes> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SimpleDialogOption(
-                onPressed: () => _deleteType(type),
+                onPressed: () => showConfirmDeletionDialog(
+                    context: context, onPressed: () => _deleteType(type)),
                 child: const Text('Delete',
                   style: TextStyle(
                       fontSize: 18,

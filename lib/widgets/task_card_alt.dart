@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app_uni/helpers/show_confirm_deletion_dialog.dart';
 import 'package:todo_app_uni/models/task.dart';
 import 'package:todo_app_uni/models/task_type.dart';
 import 'package:todo_app_uni/widgets/task_type_chip.dart';
@@ -29,6 +30,7 @@ class _TaskCardAltState extends State<TaskCardAlt> {
         SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
     );
     widget.setStateCallback();
+    Navigator.popUntil(context, ModalRoute.withName('/home'));
   }
 
   void _completeTask() {
@@ -126,7 +128,8 @@ class _TaskCardAltState extends State<TaskCardAlt> {
                           height: 50,
                           width: 50,
                           child: ElevatedButton(
-                              onPressed: _removeTask,
+                              onPressed: () => showConfirmDeletionDialog(
+                                  context: context, onPressed: _removeTask),
                               style: const ButtonStyle(
                                 backgroundColor: MaterialStatePropertyAll(Colors.red),
                               ),
