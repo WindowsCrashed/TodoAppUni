@@ -3,21 +3,21 @@ import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:todo_app_uni/models/task_priority.dart';
 import 'package:todo_app_uni/models/task_type.dart';
-import 'package:todo_app_uni/models/validation_response.dart';
+import 'package:todo_app_uni/models/task.dart';
 import 'package:todo_app_uni/services/task_service.dart';
 import 'package:todo_app_uni/services/task_type_service.dart';
 import 'package:todo_app_uni/widgets/app_appbar.dart';
 import 'package:todo_app_uni/services/task_priority_service.dart';
 import 'package:todo_app_uni/widgets/save_cancel_buttons.dart';
 
-class CreateTask extends StatefulWidget {
-  const CreateTask({Key? key}) : super(key: key);
+class EditTask extends StatefulWidget {
+  const EditTask({Key? key}) : super(key: key);
 
   @override
-  State<CreateTask> createState() => _CreateTaskState();
+  State<EditTask> createState() => _EditTaskState();
 }
 
-class _CreateTaskState extends State<CreateTask> {
+class _EditTaskState extends State<EditTask> {
   final _formKey = GlobalKey<FormState>();
   final _taskPriorityService = TaskPriorityService();
   final _taskTypeService = TaskTypeService();
@@ -34,12 +34,13 @@ class _CreateTaskState extends State<CreateTask> {
   TimeOfDay? _time = const TimeOfDay(hour: 0, minute: 0);
   TaskPriority? _priority;
   List<TaskType> _types = [];
+  Task? _task;
 
   void save() {
     if (_formKey.currentState!.validate()) {
       FocusScope.of(context).unfocus();
 
-      Map task = {
+      Map newTask = {
         'name': _nameController.text,
         'description': _descriptionController.text,
         'date': _date,
@@ -48,12 +49,10 @@ class _CreateTaskState extends State<CreateTask> {
         'types': _types
       };
 
-      ValidationResponse response = _taskService.addTask(task);
-      if (response.response) {
-        Navigator.pop(context);
-      }
+      String response = _taskService.editTask(_task!, newTask);
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.message), duration: const Duration(seconds: 3),)
+          SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
       );
     }
   }
@@ -116,18 +115,38 @@ class _CreateTaskState extends State<CreateTask> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_task == null) {
+      _task = (ModalRoute.of(context)!.settings.arguments as Map)['task'];
+      _nameController.text = _task!.name;
+      _descriptionController.text = _task!.description;
+      _dateController.text = _task!.getDate();
+      _timeController.text = _task!.getTime();
+      _priorityController.text = _task!.priority.priority;
+
+      _date = _task!.date;
+      _time = TimeOfDay.fromDateTime(_task!.date);
+      _types.addAll(_task!.types as List<TaskType>);
+      _priority = _task!.priority;
+
+      // print(_types[0].type);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: const AppAppBar(title: 'Create Task'),
+        appBar: const AppAppBar(title: 'Edit Task'),
         body: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 25),
             child: GestureDetector(
               child: Column(
                 children: [
-                  const Text('Create a new task',
+                  const Text('Edit a task',
                     style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold
@@ -206,32 +225,32 @@ class _CreateTaskState extends State<CreateTask> {
                                     },
                                   ),
                                   DropdownButtonFormField(
-                                      value: _priority == null ? 'Select priority' : _priority?.priority,
-                                      items: [
-                                        DropdownMenuItem(
+                                    value: _priority == null ? 'Select priority' : _priority?.priority,
+                                    items: [
+                                      DropdownMenuItem(
                                           value: 'Select priority',
                                           child: Container(
-                                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                                              margin: const EdgeInsets.symmetric(horizontal: 10),
                                               child: const Text('Select priority')
                                           )
-                                        ),
-                                        ..._taskPriorityService.getPriorities()
+                                      ),
+                                      ..._taskPriorityService.getPriorities()
                                           .map(
                                               (p) => DropdownMenuItem(
-                                                  value: p.priority,
-                                                  child: Text(p.priority)
-                                              )
-                                          ).toList()
-                                      ],
-                                      onChanged: _pickPriority,
-                                      isExpanded: true,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty
-                                            || value == 'Select priority') {
-                                          return 'Required field';
-                                        }
-                                        return null;
-                                      },
+                                              value: p.priority,
+                                              child: Text(p.priority)
+                                          )
+                                      ).toList()
+                                    ],
+                                    onChanged: _pickPriority,
+                                    isExpanded: true,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty
+                                          || value == 'Select priority') {
+                                        return 'Required field';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ],
                               ),
@@ -240,13 +259,14 @@ class _CreateTaskState extends State<CreateTask> {
                             MultiSelectDialogField(
                               items: _taskTypeService.getTypes().map(
                                       (t) => MultiSelectItem(t.type, t.type)
-                                    ).toList(),
+                              ).toList(),
                               onConfirm: _pickTypes,
                               title: const Text('Select task type(s)'),
                               buttonText: const Text('Select task type(s) (optional)',
                                 style: TextStyle(fontSize: 16),
                               ),
                               dialogHeight: 310,
+                              initialValue: _types.map((t) => t.type).toList(),
                             ),
                           ],
                         ),
