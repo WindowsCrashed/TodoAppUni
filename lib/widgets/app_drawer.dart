@@ -38,6 +38,11 @@ class AppDrawer extends StatelessWidget {
               icon: Icons.priority_high,
               onTap: () => Navigator.pushNamed(context, '/list-task-priorities')
           ),
+          DrawerListTile(
+              title: 'Completed tasks',
+              icon: Icons.task_alt,
+              onTap: () => Navigator.pushNamed(context, '/list-completed-tasks')
+          ),
           const AppDrawerSectionDivider(label: 'Creation'),
           DrawerListTile(
             title: 'Create task',

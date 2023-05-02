@@ -1,3 +1,4 @@
+import 'package:todo_app_uni/models/completed_task.dart';
 import 'package:todo_app_uni/models/task.dart';
 import 'package:todo_app_uni/models/validation_response.dart';
 import 'package:todo_app_uni/data/db.dart';
@@ -64,8 +65,24 @@ class TaskService {
 
   String completeTask(String name) {
     Task? task = getTask(name);
-    Db.completedTasks.add(task);
+    CompletedTask completedTask = CompletedTask(task: task);
+
+    Db.completedTasks.add(completedTask);
     Db.tasks.remove(task);
     return 'Task successfully completed.';
+  }
+
+  List<CompletedTask> getCompletedTasks() {
+    return Db.completedTasks;
+  }
+
+  CompletedTask getCompletedTask(String name) {
+    return Db.completedTasks.firstWhere((ct) => ct.task.name == name);
+  }
+
+  String deleteCompletedTask(String name) {
+    CompletedTask? completedTask = getCompletedTask(name);
+    Db.completedTasks.remove(completedTask);
+    return 'Task successfully removed.';
   }
 }
