@@ -33,6 +33,13 @@ class TaskPriorityService {
     return Db.priorities.firstWhere((p) => p.priority == name);
   }
 
+  String editPriority(TaskPriority priority, Map newPriority) {
+    getPriority(priority.priority).priority = newPriority['priority'];
+    getPriority(priority.priority).color = newPriority['color'];
+    getPriority(priority.priority).icon = newPriority['icon'];
+    return 'Task priority successfully updated.';
+  }
+
   String deletePriority(String name) {
     TaskPriority? priority = getPriority(name);
     Db.priorities.remove(priority);

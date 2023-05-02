@@ -59,7 +59,12 @@ class _ListTaskPrioritiesState extends State<ListTaskPriorities> {
                 ),
               ),
               SimpleDialogOption(
-                onPressed: () {},
+                onPressed: () async {
+                  await Navigator.pushNamed(context, '/edit-task-priority',
+                    arguments: { 'priority': priority }
+                  );
+                  setState(() {});
+                },
                 child: const Text('Edit',
                   style: TextStyle(
                       fontSize: 18,
