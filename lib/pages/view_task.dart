@@ -5,9 +5,14 @@ import 'package:todo_app_uni/models/task_type.dart';
 import 'package:todo_app_uni/widgets/task_type_chip_big.dart';
 import 'package:todo_app_uni/services/task_service.dart';
 
-class ViewTask extends StatelessWidget {
-  ViewTask({Key? key}) : super(key: key);
+class ViewTask extends StatefulWidget {
+  const ViewTask({Key? key}) : super(key: key);
 
+  @override
+  State<ViewTask> createState() => _ViewTaskState();
+}
+
+class _ViewTaskState extends State<ViewTask> {
   final _taskService = TaskService();
 
   List<Widget> _generateTags(List<TaskType>? types) {
@@ -23,12 +28,19 @@ class ViewTask extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  void _deleteTask(String task, BuildContext context) {
+  void _deleteTask(String task) {
     String response = _taskService.deleteTask(task);
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response), duration: const Duration(seconds: 3),)
     );
     Navigator.pop(context);
+  }
+
+  void _editTask(Task task) async {
+    await Navigator.pushNamed(context, '/edit-task',
+      arguments: { 'task': task }
+    );
+    setState(() {});
   }
 
   @override
@@ -149,7 +161,7 @@ class ViewTask extends StatelessWidget {
                                 width: 125,
                                 height: 40,
                                 child: ElevatedButton(
-                                  onPressed: () => _deleteTask(task.name, context),
+                                  onPressed: () => _deleteTask(task.name),
                                   style: const ButtonStyle(
                                       backgroundColor: MaterialStatePropertyAll(Colors.red)
                                   ),
@@ -171,7 +183,7 @@ class ViewTask extends StatelessWidget {
                                 width: 125,
                                 height: 40,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () => _editTask(task),
                                   style: const ButtonStyle(
                                       backgroundColor: MaterialStatePropertyAll(Colors.amber)
                                   ),

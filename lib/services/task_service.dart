@@ -41,6 +41,21 @@ class TaskService {
     return Db.tasks.firstWhere((t) => t.name == name);
   }
 
+  String editTask(Task task, Map newTask) {
+    DateTime date = DateTime(
+        newTask['date'].year, newTask['date'].month, newTask['date'].day,
+        newTask['time'].hour, newTask['time'].minute
+    );
+
+    getTask(task.name).name = newTask['name'];
+    getTask(task.name).description = newTask['description'];
+    getTask(task.name).date = date;
+    getTask(task.name).priority = newTask['priority'];
+    getTask(task.name).types = newTask['types'];
+
+    return 'Task successfully updated.';
+  }
+
   String deleteTask(String name) {
     Task? task = getTask(name);
     Db.tasks.remove(task);
